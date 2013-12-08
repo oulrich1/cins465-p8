@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @project.name %>
+</p>
+
+<p>
+  <strong>Expected due date:</strong>
+  <%= @project.expected_due_date %>
+</p>
+
+<p>
+  <strong>Manager:</strong>
+  <%= @project.manager %>
+</p>
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>

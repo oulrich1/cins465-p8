@@ -1,0 +1,38 @@
+<div class="large-9 push-3 columns">
+
+<h1>Listing deadlines</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Members</th>
+      <th>Projects</th>
+      <th>Description</th>
+      <th>Due date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @deadlines.each do |deadline| %>
+      <tr>
+        <td><%= deadline.members %></td>
+        <td><%= deadline.projects %></td>
+        <td><%= deadline.description %></td>
+        <td><%= deadline.due_date %></td>
+        <td><%= link_to 'Show', deadline %></td>
+        <td><%= link_to 'Edit', edit_deadline_path(deadline) %></td>
+        <td><%= link_to 'Destroy', deadline, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Deadline', new_deadline_path %>
+
+
+</div>

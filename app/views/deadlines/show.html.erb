@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Members:</strong>
+  <%= @deadline.members %>
+</p>
+
+<p>
+  <strong>Projects:</strong>
+  <%= @deadline.projects %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @deadline.description %>
+</p>
+
+<p>
+  <strong>Due date:</strong>
+  <%= @deadline.due_date %>
+</p>
+
+<%= link_to 'Edit', edit_deadline_path(@deadline) %> |
+<%= link_to 'Back', deadlines_path %>

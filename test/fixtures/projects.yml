@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  expected_due_date: 2013-12-07 22:03:41
+  manager_id: 
+
+two:
+  name: MyString
+  expected_due_date: 2013-12-07 22:03:41
+  manager_id: 
