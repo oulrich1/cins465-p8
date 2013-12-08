@@ -1,5 +1,5 @@
 GroupProjectSync::Application.routes.draw do
-  devise_for :member
+  devise_for :members
 
   resources :deadlines
 
