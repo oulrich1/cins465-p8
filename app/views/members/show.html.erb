@@ -1,3 +1,16 @@
+
+<h1><%= @member.name.split(" ").each{|w|
+            w.capitalize
+        }.join(" ") %>'s Profile 
+
+<% if @member.type == "project_manager" %>
+    <small>.. a Project Manager</small>
+<% else %>
+    <small>.. a Member</small>
+<% end %>
+
+</h1>
+
 <p id="notice"><%= notice %></p>
 
 <p>

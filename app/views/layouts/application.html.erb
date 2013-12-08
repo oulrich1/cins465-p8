@@ -35,14 +35,14 @@
         <ul class="right">
           
           <li class="has-dropdown">
-            <a href="#">Projects</a>
+            <a href="projects">Projects</a>
             <ul class="dropdown">
                 <li><a href="members">Members</a></li>
                 <li><a href="deadlines">Deadlines</a></li>
             </ul>
           </li>
 
-          <li class="active"><a href="devise/session/new">Login</a></li>
+          <li class="active"><a href="members/sign_in">Login</a></li>
         </ul>
 
         <!-- Left Nav Section -->
@@ -71,6 +71,9 @@
 
     <div class="row">    
 
+      <% if member_signed_in? %>
+        <div>Signed in as... <%= current_member.email %></div>
+      <% end %>
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
 
@@ -81,12 +84,21 @@
       <div class="large-3 pull-9 columns">
           
         <ul class="side-nav">
-          <li><a href="projects">Projects</a></li>
-          <li><a href="members">Members</a></li>
-          <li><a href="members/project_managers">Project Managers</a></li>
-          <li><a href="deadlines">Deadlines</a></li>
-          <li></li>
-          <li><a href="#">Login/Register</a></li>
+          <li><a href="/projects">Projects</a></li>
+          <% if member_signed_in? %>
+            <li><a href="/members">Members</a></li>
+            <li><a href="/members/project_managers">Project Managers</a></li>
+          <% end %>
+          <li><a href="/deadlines">Deadlines</a></li>
+          <li><p></p></li>
+          <% if member_signed_in? %>
+            <li><%=link_to "Profile", controller: "members", action: "show", id: current_member.id %></li>
+            <li><a href="members/sign_out"></a></li>
+            <li><%=link_to "Logout", "/members/sign_out", id: current_member.id , method: :delete %></li>
+          <% else %>
+            <li><a href="members/sign_in">Login</a></li>
+            <li><a href="members/sign_up">Register</a></li>
+          <% end %>
         </ul>
         
         <p></p>

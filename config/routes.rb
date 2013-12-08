@@ -1,4 +1,7 @@
 GroupProjectSync::Application.routes.draw do
+
+  get "/members/project_managers", to: "members#show_all_project_managers"
+
   devise_for :members
 
   resources :deadlines
@@ -8,6 +11,7 @@ GroupProjectSync::Application.routes.draw do
   resources :projects
 
   get "about" , to: "about#index"
+
  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

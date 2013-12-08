@@ -13,6 +13,10 @@ class MembersController < ApplicationController
   def show
   end
 
+  def show_all_project_managers
+    
+  end
+
   # GET /members/new
   def new
     @member = Member.new
