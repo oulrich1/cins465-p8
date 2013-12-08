@@ -3,12 +3,15 @@ GroupProjectSync::Application.routes.draw do
   get "/members/project_managers", to: "members#show_all_project_managers"
 
   devise_for :members
-
+  
   resources :deadlines
 
-  resources :members
-
   resources :projects
+
+  resources :members do 
+    resources :projects
+  end 
+
 
   get "about" , to: "about#index"
 

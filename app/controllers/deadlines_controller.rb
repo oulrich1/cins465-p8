@@ -69,6 +69,6 @@ class DeadlinesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def deadline_params
-      params.require(:deadline).permit(:members_id, :projects_id, :description, :due_date)
+      params.require(:deadline).permit(:title, :members_id, :projects_id, :description, :due_date)
     end
 end

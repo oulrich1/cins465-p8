@@ -25,6 +25,8 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
+    #@project.manager_id = current_member.manager_id;
+     flash[:notice] = project_params
 
     respond_to do |format|
       if @project.save

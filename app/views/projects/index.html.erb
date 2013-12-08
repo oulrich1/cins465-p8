@@ -6,11 +6,13 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Expected due date</th>
+      <th>Expected Due Date</th>
       <th>Manager</th>
       <th></th>
+      <%  if current_member && current_member.is_project_manager == "on" %>
       <th></th>
       <th></th>
+      <%  end %>
     </tr>
   </thead>
 
@@ -19,10 +21,14 @@
       <tr>
         <td><%= project.name %></td>
         <td><%= project.expected_due_date %></td>
-        <td><%= project.manager %></td>
+        <td><%= Member.find(project.manager_id).name %></td>
         <td><%= link_to 'Show', project %></td>
+       
+        <%  if current_member && current_member.is_project_manager == "on" %>
         <td><%= link_to 'Edit', edit_project_path(project) %></td>
         <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+
       </tr>
     <% end %>
   </tbody>
@@ -30,6 +36,8 @@
 
 <br>
 
-<%= link_to 'New Project', new_project_path %>
+<%  if current_member && current_member.is_project_manager == "on"  %>
+<%= link_to 'New Project', new_project_path, class: "button alert" %>
+<% end %>
 
 </div>

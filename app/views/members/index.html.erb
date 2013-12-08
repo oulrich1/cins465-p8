@@ -1,6 +1,6 @@
 <div class="large-9 push-3 columns">
 
-<h1>Listing members</h1>
+<h1>Members</h1>
 
 <table>
   <thead>
@@ -21,10 +21,12 @@
         <td><%= member.email %></td>
         <td><%= member.type %></td>
         <td><%= link_to 'Show', member %></td>
-        <td><%= link_to 'Edit', edit_member_path(member) %></td>
+
         <% if member.id == current_member.id %>
+        <td><%= link_to 'Edit', edit_member_path(member) %></td>
           <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
          <% end %>
+
       </tr>
     <% end %>
   </tbody>
@@ -32,6 +34,8 @@
 
 <br>
 
-<%= link_to 'New Member', new_member_path %>
+<div>
+<%= link_to 'Create New Profile', new_member_path, class: "button alert" %>
+</div>
 
 </div>

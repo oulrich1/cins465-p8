@@ -1,32 +1,43 @@
 
-<h1><%= @member.name.split(" ").each{|w|
-            w.capitalize
-        }.join(" ") %>'s Profile 
+<div class="large-9 push-3 columns">
 
-<% if @member.type == "project_manager" %>
-    <small>.. a Project Manager</small>
-<% else %>
-    <small>.. a Member</small>
-<% end %>
+  <h1><%= @member.name.split(" ").each{|w|
+              w.capitalize
+          }.join(" ") %>'s Profile 
 
-</h1>
+  <% if @member.type == "project_manager" %>
+      <small>.. a Project Manager</small>
+  <% else %>
+      <small>.. a Member</small>
+  <% end %>
 
-<p id="notice"><%= notice %></p>
+  </h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @member.name %>
-</p>
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @member.email %>
-</p>
+  <p>
+    <strong>Name:</strong>
+    <%= @member.name %>
+  </p>
 
-<p>
-  <strong>Type:</strong>
-  <%= @member.type %>
-</p>
+  <p>
+    <strong>Email:</strong>
+    <%= @member.email %>
+  </p>
 
-<%= link_to 'Edit', edit_member_path(@member) %> |
-<%= link_to 'Back', members_path %>
+
+  <p>
+    <strong>Type:</strong>
+    <%= @member.type %>
+  </p>
+
+  <div>
+    <%= link_to 'Back', members_path %> |
+    <%= link_to 'Edit', edit_member_path(@member) %> 
+    <% if current_member.id == @member.id %>
+        | <%= link_to 'Destroy', current_member, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+
+  </div>
+
+</div>

@@ -2,6 +2,9 @@ class MembersController < ApplicationController
   before_filter :authenticate_member! # current_member
   before_action :set_member, only: [:show, :edit, :update, :destroy]
 
+# in the forms we need this association??
+# <%= f.association :members %>
+
   # GET /members
   # GET /members.json
   def index
@@ -14,7 +17,7 @@ class MembersController < ApplicationController
   end
 
   def show_all_project_managers
-    
+    @members = Member.where("is_project_manager = 'on'")
   end
 
   # GET /members/new
@@ -29,6 +32,10 @@ class MembersController < ApplicationController
   # POST /members
   # POST /members.json
   def create
+      # type = "member"
+      # if params[:is_project_manager] == "on"
+      #   type = "project_manager"
+      # end
     @member = Member.new(member_params)
 
     respond_to do |format|
@@ -65,6 +72,9 @@ class MembersController < ApplicationController
       format.json { head :no_content }
     end
   end
+    def is_project_manager
+      
+    end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -76,4 +86,6 @@ class MembersController < ApplicationController
     def member_params
       params.require(:member).permit(:name, :email, :type)
     end
+
+
 end

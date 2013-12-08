@@ -1,5 +1,48 @@
 <div class="large-9 push-3 columns">
 
-<p>hey</p>
+
+<h1>Project Managers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Type</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @members.each do |manager| %>
+      <tr>
+        <td><%= manager.name %></td>
+        <td><%= manager.email %></td>
+        <td><%= manager.type %></td>
+        <td><%= link_to 'Show', manager %></td>
+        <% if manager.id == current_member.id %>
+        <td><%= link_to 'Edit', edit_member_path(manager) %></td>
+          <td><%= link_to 'Destroy', manager, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+         <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<div>
+
+  <% if !current_member.is_project_manager %>
+  <%= link_to 'Upgrade to PM', edit_member_path(current_member) %>
+  <% end %>
+
+</div>
+<div>
+<%= link_to 'List Project Managers on My Projects', edit_member_path(current_member) %>
+</div>
+
 
 </div>

@@ -12,8 +12,10 @@
 
 <p>
   <strong>Manager:</strong>
-  <%= @project.manager %>
+  <%= Member.find(@project.manager_id).name  %>
 </p>
 
+<div>
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
+</div>
