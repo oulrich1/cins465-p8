@@ -4,6 +4,7 @@ GroupProjectSync::Application.routes.draw do
 
   get "/members/projects", to: "members#show_projects"
 
+  get "/members/:id/my_project_managers", to: "members#show_my_project_managers"
   get "/members/project_managers", to: "members#show_all_project_managers"
 
   devise_for :members, :controllers => {:registrations => "registrations"}

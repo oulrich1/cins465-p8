@@ -1,0 +1,38 @@
+<div class="large-9 push-3 columns">
+
+
+<h1>My Managers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Type</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @managers %>
+      <% @managers.each do |manager| %>
+        <tr>
+          <td><%= manager.name %></td>
+          <td><%= manager.email %></td>
+          <td><%= manager.type %></td>
+          <td><%= link_to 'Show', manager %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<div>
+<%= link_to 'Back', "/members/project_managers" %>
+</div>
+
+
+
+</div>

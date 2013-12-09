@@ -16,9 +16,18 @@ class MembersController < ApplicationController
   def show
   end
 
-  # GET 
+  # GET /members/project_managers
   def show_all_project_managers
     @members = Member.where("is_project_manager = 'on'")
+  end
+
+  # GET /members/:id/my_project_managers
+  def show_my_project_managers
+    @managers = Member
+      .select("members.*")
+      .joins("right outer join member_project_groupings as MPG on MPG.m_id = #{current_member.id}")
+      .joins("right outer join projects on projects.id = MPG.p_id")
+      .where("members.id is not NULL");
   end
   
   def show_projects
@@ -75,9 +84,10 @@ class MembersController < ApplicationController
       format.json { head :no_content }
     end
   end
-    def is_project_manager
-      
-    end
+
+  def is_project_manager
+    
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

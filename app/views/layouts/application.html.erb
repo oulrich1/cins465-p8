@@ -83,12 +83,12 @@
       <div class="large-3 pull-9 columns">
           
         <ul class="side-nav fixt">
-          <li><a href="/projects">Projects</a></li>
+          <li><a href="/projects">All Projects</a></li>
           <% if member_signed_in? %>
-            <li><a href="/members">Members</a></li>
-            <li><a href="/members/project_managers">Project Managers</a></li>
+            <li><a href="/members">All Members</a></li>
+            <li><a href="/members/project_managers">All Project Managers</a></li>
           <% end %>
-          <li><a href="/deadlines">Deadlines</a></li>
+          <li><a href="/deadlines">All Deadlines</a></li>
           <li><p class="seperator-tiny"></p></li>
           <% if member_signed_in? %>
             <li><%=link_to "My Projects", "/members/projects" %></li>

@@ -33,6 +33,12 @@
                 "Manager"
               <% else %>
                 "Member"
+                <small >
+                  <% if !current_member.is_project_manager %>
+                  <%= link_to '(Upgrade to PM)', edit_member_path(current_member), style: "color:red;" %>
+                  <% end %>
+                </small>
+
               <% end %>
             </td>
         </tr>

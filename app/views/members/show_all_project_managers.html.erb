@@ -34,14 +34,13 @@
 <br>
 
 <div>
-
   <% if !current_member.is_project_manager %>
   <%= link_to 'Upgrade to PM', edit_member_path(current_member) %>
   <% end %>
-
 </div>
+
 <div>
-<%= link_to 'List Project Managers on My Projects', edit_member_path(current_member) %>
+<%= link_to 'List my Project Managers', "/members/#{current_member.id}/my_project_managers" %>
 </div>
 
 

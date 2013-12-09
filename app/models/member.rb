@@ -5,6 +5,8 @@ class Member < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
 
-    has_many :deadlines, :foreign_key => 'm_id'
-    has_many :projects, :through => :deadlines
+    has_many :member_project_groupings, :foreign_key => 'm_id'
+    has_many :projects, :through => :member_project_groupings
 end
+
+

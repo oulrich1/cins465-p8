@@ -48,6 +48,8 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
   end
 
+
+
   # POST/PATCH /projects/1/add_members
   def add_members
     @project = Project.find(params[:id])
@@ -74,10 +76,6 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
 
     member_ids = params[:project] # returns an array of key value pairs (m_id => p_id)
-    log_test(member_ids);
-    log_test(member_ids);
-    log_test(member_ids);
-    log_test(member_ids);
     member_ids.each do |pair|
       MemberProjectGrouping.where("m_id = #{pair[0]} and p_id = #{@project.id}").destroy_all
     end
