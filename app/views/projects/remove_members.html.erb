@@ -1,0 +1,18 @@
+<div class="large-9 push-3 columns">
+
+<h1> Remove Contributors from Your Project! </h1>
+
+<h4> <small>Project Name:</small> <%= @project.name %></h4>
+<div class="seperator-medium spm-light"></div>
+
+    <%= render 'remove_members_form' %>
+
+<div class="seperator-medium spm-dark"></div>
+
+<div>
+    <%= link_to 'Show', @project %> |
+    <%= link_to 'Back', projects_path %>
+</div>
+
+</div>
+

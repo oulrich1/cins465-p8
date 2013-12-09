@@ -15,7 +15,8 @@
     <%= render "show_project_members" %>
     <div>
     <% if current_member && current_member.id == @project.manager_id %>
-        <%= link_to 'Add Members', "/projects/#{@project.id}/show_members" %>
+        <%= link_to 'Add Members', "/projects/#{@project.id}/show_members" %> |
+        <%= link_to 'Remove Members', "/projects/#{@project.id}/remove_members" %> 
     <% end %>
     </div>
     <br>

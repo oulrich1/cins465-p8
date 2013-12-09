@@ -27,12 +27,12 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
-    # @project.manager_id = current_member.manager_id;
-    # flash[:notice] = project_params
-
 
     respond_to do |format|
       if @project.save
+
+        save_member_project_relation({m_id: current_member.id.to_s, p_id: @project.id.to_s})
+
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render action: 'show', status: :created, location: @project }
       else
@@ -50,6 +50,7 @@ class ProjectsController < ApplicationController
 
   # POST/PATCH /projects/1/add_members
   def add_members
+    @project = Project.find(params[:id])
     save_members
 
     # access the data from members
@@ -62,11 +63,34 @@ class ProjectsController < ApplicationController
     redirect_to @project
   end
 
+  # GET
+  def remove_members
+    @members = Member.all
+    @project = Project.find(params[:id])
+  end
+
+  # POST/PUT
+  def delete_members
+    @project = Project.find(params[:id])
+
+    member_ids = params[:project] # returns an array of key value pairs (m_id => p_id)
+    log_test(member_ids);
+    log_test(member_ids);
+    log_test(member_ids);
+    log_test(member_ids);
+    member_ids.each do |pair|
+      MemberProjectGrouping.where("m_id = #{pair[0]} and p_id = #{@project.id}").destroy_all
+    end
+    
+    redirect_to @project
+  end
+
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
     respond_to do |format|
       if @project.update(project_params)
+
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
         format.json { head :no_content }
       else
@@ -95,8 +119,6 @@ class ProjectsController < ApplicationController
     end
 
     def save_members
-      @project = Project.find(params[:id])
-
       # get the list of member ids
       member_ids = params[:project]
       #log_test(member_ids);
@@ -110,18 +132,22 @@ class ProjectsController < ApplicationController
       member_ids.each{ 
         |pair|
         tuple = {m_id: pair[0], p_id: @project.id.to_s}
-        if MemberProjectGrouping.find_by(tuple)
-          log_test("Warning: grouping already exists! " + grouping.to_s)
-        else 
-          grouping = MemberProjectGrouping.new(tuple)
-          if grouping.save
-            log_test("Successfully Saved new MemberProjectGrouping: " + grouping.to_s)
-          else
-            log_test("Failed to Save new MemberProjectGrouping w/ m_id: "\
-                      + id.to_s + ", p_id: " + @project.id)
-          end
-        end
+        save_member_project_relation(tuple)
       }
+    end
+
+    def save_member_project_relation(tuple)
+      if MemberProjectGrouping.find_by(tuple)
+        log_test("Warning: grouping already exists! " + tuple.to_s)
+      else 
+        grouping = MemberProjectGrouping.new(tuple)
+        if grouping.save
+          log_test("Successfully Saved new MemberProjectGrouping: " + grouping.to_s)
+        else
+          log_test("Failed to Save new MemberProjectGrouping w/ m_id: "\
+                    + id.to_s + ", p_id: " + @project.id)
+        end
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

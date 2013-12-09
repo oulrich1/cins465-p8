@@ -3,6 +3,7 @@ GroupProjectSync::Application.routes.draw do
   resources :member_project_groupings
 
   get "/members/projects", to: "members#show_projects"
+
   get "/members/project_managers", to: "members#show_all_project_managers"
 
   devise_for :members, :controllers => {:registrations => "registrations"}
@@ -10,11 +11,14 @@ GroupProjectSync::Application.routes.draw do
   resources :deadlines
 
   get "/projects/:id/show_members", to: "projects#show_members"
+
   post "/projects/:id/add_members", to: "projects#add_members"
   get "/projects/:id/add_members", to: "projects#add_members"
 
-  resources :projects
+  post "/projects/:id/delete_members", to: "projects#delete_members"
+  get "/projects/:id/remove_members", to: "projects#remove_members"
 
+  resources :projects
 
 
   resources :members do 

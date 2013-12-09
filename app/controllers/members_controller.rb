@@ -38,9 +38,7 @@ class MembersController < ApplicationController
   # POST /members.json
   def create
       # type = "member"
-      # if params[:is_project_manager] == "on"
-      #   type = "project_manager"
-      # end
+
     @member = Member.new(member_params)
 
     respond_to do |format|
@@ -89,7 +87,11 @@ class MembersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def member_params
-      params.require(:member).permit(:name, :email, :type)
+      params.require(:member).permit(:name, :email, :type, :is_project_manager)
+    end
+
+    def update_params
+       params.require(:member).permit(:name, :email, :type, :is_project_manager)
     end
 
 
