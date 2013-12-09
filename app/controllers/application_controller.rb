@@ -11,5 +11,8 @@ class ApplicationController < ActionController::Base
         devise_parameter_sanitizer.for(:sign_up) { |u| 
             u.permit(:name, :email, :password, :password_confirmation, :is_project_manager) 
         }
+        devise_parameter_sanitizer.for(:edit) { |u| 
+            u.permit(:name, :email, :password, :password_confirmation, :is_project_manager) 
+        }
     end
 end

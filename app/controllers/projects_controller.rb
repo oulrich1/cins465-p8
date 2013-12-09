@@ -30,6 +30,7 @@ class ProjectsController < ApplicationController
     # @project.manager_id = current_member.manager_id;
     # flash[:notice] = project_params
 
+
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
@@ -49,28 +50,7 @@ class ProjectsController < ApplicationController
 
   # POST/PATCH /projects/1/add_members
   def add_members
-    @project = Project.find(params[:id])
-
-    # get the list of member ids
-    member_ids = params[:project]
-    log_test(member_ids);
-
-    # add the members with ids in member_ids:
-    # to the groupings table.. "member_project_groupings"
-    # That table is the intermediary reference table between
-    #    members and projects:
-    # => members have many projects
-    # => projects have many members
-    member_ids.each{ 
-      |pair|
-      grouping = MemberProjectGrouping.new({m_id: pair[0], p_id: @project.id.to_s})
-      if grouping.save
-        log_test("Successfully Saved new MemberProjectGrouping: " + grouping.to_s)
-      else
-        log_test("Failed to Save new MemberProjectGrouping w/ m_id: "\
-                  + id.to_s + ", p_id: " + @project.id)
-      end
-    }
+    save_members
 
     # access the data from members
     # where the member id is the same 
@@ -112,6 +92,36 @@ class ProjectsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_project
       @project = Project.find(params[:id])
+    end
+
+    def save_members
+      @project = Project.find(params[:id])
+
+      # get the list of member ids
+      member_ids = params[:project]
+      #log_test(member_ids);
+
+      # add the members with ids in member_ids:
+      # to the groupings table.. "member_project_groupings"
+      # That table is the intermediary reference table between
+      #    members and projects:
+      # => members have many projects
+      # => projects have many members
+      member_ids.each{ 
+        |pair|
+        tuple = {m_id: pair[0], p_id: @project.id.to_s}
+        if MemberProjectGrouping.find_by(tuple)
+          log_test("Warning: grouping already exists! " + grouping.to_s)
+        else 
+          grouping = MemberProjectGrouping.new(tuple)
+          if grouping.save
+            log_test("Successfully Saved new MemberProjectGrouping: " + grouping.to_s)
+          else
+            log_test("Failed to Save new MemberProjectGrouping w/ m_id: "\
+                      + id.to_s + ", p_id: " + @project.id)
+          end
+        end
+      }
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

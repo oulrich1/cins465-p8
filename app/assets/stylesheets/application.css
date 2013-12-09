@@ -27,7 +27,12 @@
 
 @media (max-width: 767px) {
     .fixt{
-        position: absolute; margin-left: 0px;
+        position: relative !important; 
+        margin-left: 0px !important;
+    }
+    .content-row{
+        height: 300px;
+        min-height: 500px;
     }
 }
 
@@ -36,7 +41,17 @@ form  select.datetime{
     width: inherit !important;
 }
 
-.row{
+table{
+    background-color: #F5F5F5 !important;
+}
+
+.tr-head{
+    background-color: #AFAFAF;
+}
+
+
+.content-row{
+    min-height: 200px;
     max-width: 65.5em;
 }
 
@@ -46,8 +61,10 @@ form  select.datetime{
 .large-3{
     width:19%;
 }
+
 .fixt{
-    position: fixed; margin-left: 50px !important;
+    position: fixed; 
+    margin-left: 50px !important;
 }
 
 .seperator-tiny{

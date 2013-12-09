@@ -17,6 +17,11 @@ class RegistrationsController < Devise::RegistrationsController
     end
 
     def update
+        type = "member"
+        if params[:is_project_manager] == "on"
+            type = "manager"
+        end
+        params[:type] = type
         super
     end
 end

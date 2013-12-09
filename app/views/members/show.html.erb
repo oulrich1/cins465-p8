@@ -39,16 +39,22 @@
         <% if !@member.is_project_manager %>
         <tr>
             <td style="text-align:right;"><strong>Managers' Names:</strong></td>
-            <td><%= 
-                # ProjectList = [];
-                # ListOfMembersToProjects = MemberProject.where(m_id: @member.id);
-                # ListOfMembersToProjects.each {|m_to_p| 
-                #   ProjectList << Project.find(m_to_p.p_id);
-                # }
-                # ProjectList.each { |project| Member.find(project.manager_id).name }
-              %></td>
+            <td>
+              <% Member.joins(" LEFT OUTER JOIN member_project_groupings 
+                       ON member_project_groupings.m_id = #{@member.id}")
+                      .joins("LEFT OUTER JOIN projects 
+                       ON member_project_groupings.p_id = projects.id")
+                      .where("members.id = projects.manager_id")
+                      .each do |manager| %>
+                <%= manager.name %>
+              <% end %>
+            </td>
         </tr>
         <% end %>
+        <tr>
+            <td style="text-align:right;"><strong>Projects:</strong></td>
+            <td><%= link_to 'Click To View Projects!', "/members/projects" %></td>
+        </tr>
     </tbody>
 </table>
 

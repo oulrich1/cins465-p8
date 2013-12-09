@@ -1,0 +1,16 @@
+<table>
+<thead>
+    <tr class="tr-head">
+        <th>Member</th>
+    </tr>
+</thead>
+<tbody>
+    <% Project.joins('LEFT OUTER JOIN member_project_groupings 
+        ON member_project_groupings.p_id = projects.id')
+        .where("member_project_groupings.m_id = #{current_member.id}").each do |project| %>
+        <tr>
+            <td><%= project.name %></td>
+        </tr>
+    <% end %>
+</tbody>
+</table>

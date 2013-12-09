@@ -20,6 +20,10 @@ class MembersController < ApplicationController
   def show_all_project_managers
     @members = Member.where("is_project_manager = 'on'")
   end
+  
+  def show_projects
+    
+  end
 
   # GET /members/new
   def new
