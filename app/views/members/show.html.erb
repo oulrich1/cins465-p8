@@ -5,35 +5,56 @@
               w.capitalize
           }.join(" ") %>'s Profile 
 
-  <% if @member.type == "project_manager" %>
-      <small>.. a Project Manager</small>
+  <% if @member.type == "manager" %>
+      <small>(Project Manager)</small>
   <% else %>
-      <small>.. a Member</small>
+      <small>(Member)</small>
   <% end %>
 
   </h1>
 
   <p id="notice"><%= notice %></p>
 
-  <p>
-    <strong>Name:</strong>
-    <%= @member.name %>
-  </p>
 
-  <p>
-    <strong>Email:</strong>
-    <%= @member.email %>
-  </p>
-
-
-  <p>
-    <strong>Type:</strong>
-    <%= @member.type %>
-  </p>
+  <table>
+    <tbody>
+        <tr>
+            <td style="text-align:right;"><strong>Name:</strong></td>
+            <td><%= @member.name %></td>
+        </tr>
+        <tr>
+            <td style="text-align:right;"><strong>Email:</strong></td>
+            <td><%= @member.email %></td>
+        </tr>
+        <tr>
+            <td style="text-align:right;"><strong>Member Type:</strong></td>
+            <td>
+              <% if @member.is_project_manager %>
+                "Manager"
+              <% else %>
+                "Member"
+              <% end %>
+            </td>
+        </tr>
+        <% if !@member.is_project_manager %>
+        <tr>
+            <td style="text-align:right;"><strong>Managers' Names:</strong></td>
+            <td><%= 
+                # ProjectList = [];
+                # ListOfMembersToProjects = MemberProject.where(m_id: @member.id);
+                # ListOfMembersToProjects.each {|m_to_p| 
+                #   ProjectList << Project.find(m_to_p.p_id);
+                # }
+                # ProjectList.each { |project| Member.find(project.manager_id).name }
+              %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
 
   <div>
     <%= link_to 'Back', members_path %> |
-    <%= link_to 'Edit', edit_member_path(@member) %> 
+    <%= link_to 'Edit', edit_member_registration_path %>
     <% if current_member.id == @member.id %>
         | <%= link_to 'Destroy', current_member, method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>

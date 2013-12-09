@@ -23,7 +23,7 @@
         <td><%= link_to 'Show', member %></td>
 
         <% if member.id == current_member.id %>
-        <td><%= link_to 'Edit', edit_member_path(member) %></td>
+        <td><%= link_to 'Edit', edit_member_registration_path %></td>
           <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
          <% end %>
 
@@ -35,7 +35,7 @@
 <br>
 
 <div>
-<%= link_to 'Create New Profile', new_member_path, class: "button alert" %>
+<%= link_to '', "/members/sign_up" %>
 </div>
 
 </div>

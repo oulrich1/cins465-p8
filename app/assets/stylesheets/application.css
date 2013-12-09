@@ -40,3 +40,50 @@ form  select.datetime{
 .large-3{
     width:19%;
 }
+
+.seperator-tiny{
+    width: 42%; 
+    min-width: 50px;
+    max-width: 200px;
+    height: 5px; 
+    background-color: black; 
+    border-radius: 3px;
+    opacity: 0.65;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.seperator-small{
+    width: 72%; 
+    min-width: 250px;
+    max-width: 500px;
+    height: 7px; 
+    background-color: black; 
+    opacity: 0.7;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.seperator-medium{
+    width: 72%; 
+    min-width: 250px;
+    max-width: 500px;
+    height: 7px; 
+    background-color: black; 
+    opacity: 0.7;
+    margin-bottom: 5px;
+    margin-top: 5px;
+
+    width: 90%;
+    max-width: 800px;
+}
+
+.spm-dark{
+    opacity: 0.75;
+}
+.spm-medium{
+    opacity: 0.45;
+}
+.spm-light{
+    opacity: 0.25;
+}

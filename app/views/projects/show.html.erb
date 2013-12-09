@@ -1,21 +1,52 @@
+
+<div class="large-9 push-3 columns">
+
+
+
+<h1>Project Details</h1>
+<div class="seperator-small"></div>
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @project.name %>
-</p>
+<table>
+    <tbody>
+        <tr>
+            <td style="text-align:right;"><strong>Project Name:</strong></td>
+            <td><%= @project.name %></td>
+        </tr>
+        <tr>
+            <td style="text-align:right;"><strong>Due Date:</strong></td>
+            <td><%= @project.expected_due_date %></td>
+        </tr>
+        <tr>
+            <td style="text-align:right;"><strong>Expected Completion Date:</strong></td>
+            <td><%= @project.expected_due_date %></td>
+        </tr>
+        <tr>
+            <td style="text-align:right;"><strong>Manager:</strong></td>
+            <td><%= Member.find(@project.manager_id).name  %></td>
+        </tr>
+    </tbody>
+</table>
+  
+  
 
-<p>
-  <strong>Expected due date:</strong>
-  <%= @project.expected_due_date %>
-</p>
+<br>
+<div class="seperator-small" style="opacity: 0.45;"></div>
+<h2>Deadlines</h2>
+<%= render @project.deadlines %>
 
-<p>
-  <strong>Manager:</strong>
-  <%= Member.find(@project.manager_id).name  %>
-</p>
 
+<div>
+<%= link_to 'New Deadline', new_deadline_path %>
+</div>
+
+
+<br>
+<div class="seperator-small" style="opacity: 0.18;"></div>
+<div style="height:10px;"></div>
 <div>
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
+</div>
+
 </div>

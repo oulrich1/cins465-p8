@@ -2,7 +2,8 @@ GroupProjectSync::Application.routes.draw do
 
   get "/members/project_managers", to: "members#show_all_project_managers"
 
-  devise_for :members
+  #devise_for :members
+  devise_for :members, :controllers => {:registrations => "registrations"}
   
   resources :deadlines
 

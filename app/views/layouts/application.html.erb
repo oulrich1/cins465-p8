@@ -83,13 +83,12 @@
           
         <ul class="side-nav">
           <li><a href="/projects">Projects</a></li>
-
           <% if member_signed_in? %>
             <li><a href="/members">Members</a></li>
             <li><a href="/members/project_managers">Project Managers</a></li>
           <% end %>
           <li><a href="/deadlines">Deadlines</a></li>
-          <li><p></p></li>
+          <li><p class="seperator-tiny"></p></li>
           <% if member_signed_in? %>
             <li><%=link_to "My Projects", Project.find_by(id: current_member.id) %></li>
             <li><%=link_to "Profile", controller: "members", action: "show", id: current_member.id %></li>
