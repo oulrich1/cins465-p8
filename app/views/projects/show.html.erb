@@ -26,7 +26,7 @@
     <%= render @project.deadlines %>
     <div>
 
-    <% if current_member %>
+    <% if current_member && (current_member.id == @project.manager_id || MemberProjectGrouping.find_by({m_id: current_member.id, p_id: @project.id}) ) %>
         <%= link_to 'New Deadline', new_deadline_path %>
     <% end %>
     </div>

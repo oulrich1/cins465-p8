@@ -5,8 +5,8 @@
 <table>
   <thead>
     <tr>
-      <th>Members</th>
-      <th>Projects</th>
+      <th>Created By</th>
+      <th>Project Name</th>
       <th>Description</th>
       <th>Due date</th>
       <th></th>
@@ -18,8 +18,8 @@
   <tbody>
     <% @deadlines.each do |deadline| %>
       <tr>
-        <td><%= deadline.members %></td>
-        <td><%= deadline.projects %></td>
+        <td><%= deadline.m_id %></td>
+        <td><%= deadline.p_id %></td>
         <td><%= deadline.description %></td>
         <td><%= deadline.due_date %></td>
         <td><%= link_to 'Show', deadline %></td>

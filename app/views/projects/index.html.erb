@@ -25,7 +25,7 @@
         <td><%= Member.find(project.manager_id).name %></td>
         <td><%= link_to 'Show', project %></td>
        
-        <%  if current_member && current_member.is_project_manager == "on" %>
+        <%  if current_member && current_member.id == project.manager_id %>
           <td><%= link_to 'Edit', edit_project_path(project) %></td>
           <td><%= link_to 'Add Members', "/projects/#{project.id}/show_members" %></td>
           <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
