@@ -10,8 +10,9 @@
       <th>Manager</th>
       <th></th>
       <%  if current_member && current_member.is_project_manager == "on" %>
-      <th></th>
-      <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
       <%  end %>
     </tr>
   </thead>
@@ -25,8 +26,9 @@
         <td><%= link_to 'Show', project %></td>
        
         <%  if current_member && current_member.is_project_manager == "on" %>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Edit', edit_project_path(project) %></td>
+          <td><%= link_to 'Add Members', "/projects/#{project.id}/show_members" %></td>
+          <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
 
       </tr>

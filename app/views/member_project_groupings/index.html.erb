@@ -1,0 +1,31 @@
+<h1>Listing member_project_groupings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>M</th>
+      <th>P</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @member_project_groupings.each do |member_project_grouping| %>
+      <tr>
+        <td><%= member_project_grouping.id %></td>
+        <td><%= member_project_grouping.m_id %></td>
+        <td><%= member_project_grouping.p_id %></td>
+        <td><%= link_to 'Show', member_project_grouping %></td>
+        <td><%= link_to 'Edit', edit_member_project_grouping_path(member_project_grouping) %></td>
+        <td><%= link_to 'Destroy', member_project_grouping, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Member project grouping', new_member_project_grouping_path %>

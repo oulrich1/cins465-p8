@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  include ProjectsHelper
+
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   # GET /projects
@@ -25,8 +27,8 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
-    #@project.manager_id = current_member.manager_id;
-     flash[:notice] = project_params
+    # @project.manager_id = current_member.manager_id;
+    # flash[:notice] = project_params
 
     respond_to do |format|
       if @project.save
@@ -37,6 +39,47 @@ class ProjectsController < ApplicationController
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  # GET   /projects/1/show_members
+  def show_members
+    @members = Member.all
+    @project = Project.find(params[:id])
+  end
+
+  # POST/PATCH /projects/1/add_members
+  def add_members
+    @project = Project.find(params[:id])
+
+    # get the list of member ids
+    member_ids = params[:project]
+    log_test(member_ids);
+
+    # add the members with ids in member_ids:
+    # to the groupings table.. "member_project_groupings"
+    # That table is the intermediary reference table between
+    #    members and projects:
+    # => members have many projects
+    # => projects have many members
+    member_ids.each{ 
+      |pair|
+      grouping = MemberProjectGrouping.new({m_id: pair[0], p_id: @project.id.to_s})
+      if grouping.save
+        log_test("Successfully Saved new MemberProjectGrouping: " + grouping.to_s)
+      else
+        log_test("Failed to Save new MemberProjectGrouping w/ m_id: "\
+                  + id.to_s + ", p_id: " + @project.id)
+      end
+    }
+
+    # access the data from members
+    # where the member id is the same 
+    # Select * from members
+    # left inner Join member_project_groupings
+    # on members.id = member_project_groupings.m_id
+    # where member_project_groupings.p_id = 0;
+
+    redirect_to @project
   end
 
   # PATCH/PUT /projects/1
@@ -62,6 +105,8 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -10,7 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
         # add custom create logic here
         type = "member"
         if params[:is_project_manager] == "on"
-            type = "project_manager"
+            type = "manager"
         end
         params[:type] = type
         super

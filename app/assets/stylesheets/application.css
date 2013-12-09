@@ -25,6 +25,12 @@
     }
 }
 
+@media (max-width: 767px) {
+    .fixt{
+        position: absolute; margin-left: 0px;
+    }
+}
+
 
 form  select.datetime{
     width: inherit !important;
@@ -39,6 +45,9 @@ form  select.datetime{
 }
 .large-3{
     width:19%;
+}
+.fixt{
+    position: fixed; margin-left: 50px !important;
 }
 
 .seperator-tiny{

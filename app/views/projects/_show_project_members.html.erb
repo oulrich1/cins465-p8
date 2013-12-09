@@ -1,0 +1,20 @@
+<table>
+<thead>
+    <tr bgcolor="#AFAFAF">
+        <th>ID</th>
+        <th>Members</th>
+        <th>Email</th>
+    </tr>
+</thead>
+<tbody>
+    <% Member.joins('LEFT OUTER JOIN member_project_groupings 
+        ON member_project_groupings.m_id = members.id')
+        .where("member_project_groupings.p_id = #{@project.id}").each do |member| %>
+        <tr>
+            <td><%= member.id %></td>
+            <td><%= member.name %></td>
+            <td><%= member.email %></td>
+        </tr>
+    <% end %>
+</tbody>
+</table>

@@ -35,14 +35,14 @@
         <ul class="right">
           
           <li class="has-dropdown">
-            <a href="projects">Projects</a>
+            <a href="/projects">Projects</a>
             <ul class="dropdown">
-                <li><a href="members">Members</a></li>
-                <li><a href="deadlines">Deadlines</a></li>
+                <li><a href="/members">Members</a></li>
+                <li><a href="/deadlines">Deadlines</a></li>
             </ul>
           </li>
 
-          <li class="active"><a href="members/sign_in">Login</a></li>
+          <li class="active"><a href="/members/sign_in">Login</a></li>
         </ul>
 
         <!-- Left Nav Section -->
@@ -75,13 +75,14 @@
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
 
+      <!-- Content Right side -->
       <%= yield %>
 
-      <!-- Nav Sidebar -->
+      <!-- Nav Sidebar: TODO: Fix the navbar.. -->
       <!-- This is source ordered to be pulled to the left on larger screens -->
       <div class="large-3 pull-9 columns">
           
-        <ul class="side-nav">
+        <ul class="side-nav fixt">
           <li><a href="/projects">Projects</a></li>
           <% if member_signed_in? %>
             <li><a href="/members">Members</a></li>
@@ -90,7 +91,7 @@
           <li><a href="/deadlines">Deadlines</a></li>
           <li><p class="seperator-tiny"></p></li>
           <% if member_signed_in? %>
-            <li><%=link_to "My Projects", Project.find_by(id: current_member.id) %></li>
+            <li><%=link_to "My Projects", "#" %></li>
             <li><%=link_to "Profile", controller: "members", action: "show", id: current_member.id %></li>
             <li><a href="members/sign_out"></a></li>
             <li><%=link_to "Logout", "/members/sign_out", id: current_member.id , method: :delete %></li>
@@ -103,9 +104,10 @@
         <p></p>
           
       </div>
+      <!--  end navbar -->
       
     </div>
-    
+    <!-- End Content ROW -->
 
   
 
