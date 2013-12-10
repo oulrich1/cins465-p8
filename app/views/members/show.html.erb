@@ -46,7 +46,7 @@
         <tr>
             <td style="text-align:right;"><strong>Managers' Names:</strong></td>
             <td>
-              <% Member.joins(" LEFT OUTER JOIN member_project_groupings 
+                <% Member.joins(" LEFT OUTER JOIN member_project_groupings 
                        ON member_project_groupings.m_id = #{@member.id}")
                       .joins("LEFT OUTER JOIN projects 
                        ON member_project_groupings.p_id = projects.id")
@@ -59,7 +59,7 @@
         <% end %>
         <tr>
             <td style="text-align:right;"><strong>Projects:</strong></td>
-            <td><%= link_to 'Click To View Projects!', "/members/projects" %></td>
+            <td><%= link_to 'Click To View Projects!', "/members/#{@member.id}/projects" %></td>
         </tr>
     </tbody>
 </table>

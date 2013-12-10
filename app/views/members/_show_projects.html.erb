@@ -1,22 +1,31 @@
 <table>
 <thead>
+    <% projects = Project.joins('LEFT OUTER JOIN member_project_groupings 
+        ON member_project_groupings.p_id = projects.id')
+        .where("member_project_groupings.m_id = #{@member.id}") %>
+
     <tr class="tr-head">
-        <th>Member</th>
-        <th></th>
-        <th></th>
-         <th></th>
+        <% if projects.length != 0 %>
+            <th>Project Name</th>
+            <th></th>
+            <th></th>
+             <th></th>
+        <% else %>
+            <td> He's Got No Projects! </td>
+        <% end %>
     </tr>
 </thead>
 <tbody>
-    <% Project.joins('LEFT OUTER JOIN member_project_groupings 
-        ON member_project_groupings.p_id = projects.id')
-        .where("member_project_groupings.m_id = #{current_member.id}").each do |project| %>
+  
+        <% projects.each do |project| %>
         <tr>
             <td><%= project.name %></td>
-            <td><%= link_to 'Show', project %></td>
+            <td><%= link_to 'Show Details', project %></td>
             <td><%= link_to 'Edit', edit_project_path(project) %></td>
             <td><%= link_to 'Delete', "/projects/#{project.id}", method: :delete %> </td>
         </tr>
-    <% end %>
+
+        <% end %>  
+       
 </tbody>
 </table>

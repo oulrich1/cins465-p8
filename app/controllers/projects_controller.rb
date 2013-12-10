@@ -43,13 +43,15 @@ class ProjectsController < ApplicationController
   end
 
   # GET   /projects/1/show_members
+  # .. show members to select from them
   def show_members
     @project = Project.find(params[:id])
     @members = 
-    Member.select("*").joins(:member_project_groupings)
-      .joins("left outer join members as M on M.id != member_project_groupings.m_id")
-      # select M.* from member_project_groupings as 
-      #  MPG join members as M on M.id != MPG.m_id where MPG.p_id != 0;
+    Member.select("*")
+      .where("id not in (select MPG.m_id from member_project_groupings as MPG where MPG.p_id = #{@project.id})")
+        # .joins("left outer join members as M on M.id != member_project_groupings.m_id")
+      #select M.* from (select * from members) as M where id not in 
+      #(select MPG.m_id from member_project_groupings as MPG where MPG.p_id = 3); 
   end
 
 

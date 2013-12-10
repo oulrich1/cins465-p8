@@ -2,7 +2,7 @@ GroupProjectSync::Application.routes.draw do
 
   resources :member_project_groupings
 
-  get "/members/projects", to: "members#show_projects"
+  get "/members/:id/projects", to: "members#show_projects"
 
   # show my deadlines that belong to me.. 
   # aka have a m_id equal to current_member.id

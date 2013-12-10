@@ -23,7 +23,7 @@
         <td><%= project.name %></td>
         <td><%= project.expected_due_date %></td>
         <td><%= Member.find(project.manager_id).name %></td>
-        <td><%= link_to 'Show', project %></td>
+        <td><%= link_to 'Show Details', project %></td>
        
         <%  if current_member && current_member.id == project.manager_id %>
           <td><%= link_to 'Edit', edit_project_path(project) %></td>

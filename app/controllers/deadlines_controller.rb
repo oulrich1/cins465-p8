@@ -10,13 +10,14 @@ class DeadlinesController < ApplicationController
   # GET /deadlines/1
   # GET /deadlines/1.json
   def show
+    @deadline = Deadline.find(params[:id])
+    @deadline_members = Member.where("id in(select m_id from member_deadline_groupings)")
   end
 
   # GET /deadlines/new
   def new
     @project  = Project.find(params[:id])
     @deadline = Deadline.new
-    puts "------------------------------"
   end
 
   # GET /deadlines/1/edit
@@ -26,10 +27,7 @@ class DeadlinesController < ApplicationController
   def append_member
     @project  = Project.find(params[:p_id])
     @deadline  = Deadline.find(params[:d_id])
-    # now show the list of members
-    # that we can append...
-
-    # redirect_to "append_member.html.erb"
+    # continue to view..
   end
 
   def apply_deadline_to_members
@@ -53,17 +51,12 @@ class DeadlinesController < ApplicationController
     redirect_to @project
   end
 
-    def save_member_project_deadline(tuple)
-      if Deadline.find_by(tuple)
-        puts("Warning: grouping already exists! " + tuple.to_s)
-      else 
-        grouping = Deadline.new(tuple)
-        if grouping.save
-          puts("Successfully Saved new deadline association: " + grouping.to_s)
-        else
-          puts("Failed to Save new deadline associationw/ m_id: "\
-                    + id.to_s + ", p_id: " + @project.id)
-        end
+    def save_member_project_deadline(tuple)  
+      if MemberDeadlineGroupings.new({m_id: tuple[:m_id], d_id: @deadline.id}).save()
+        puts("Successfully Saved new deadline association: ")
+      else
+        puts("Failed to Save new deadline associationw/ m_id: "\
+                  + id.to_s + ", p_id: " + @project.id)
       end
     end
 
@@ -71,9 +64,12 @@ class DeadlinesController < ApplicationController
   # POST /deadlines.json
   def create
     @deadline = Deadline.new(deadline_params)
+    
 
     respond_to do |format|
       if @deadline.save
+        MemberDeadlineGroupings.new({m_id: @deadline.m_id, d_id: @deadline.id}).save()
+
         format.html { redirect_to "/projects/#{deadline_params['p_id']}", notice: 'Deadline was successfully created.' }
         format.json { render action: 'show', status: :created, location: @deadline }
       else

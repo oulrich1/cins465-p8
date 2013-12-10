@@ -3,10 +3,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-    <% if @deadline.members %>
-    <strong>Members:</strong>
-        <% @deadline.members.each do |member| %>
-            <%= member.name %>
+    <% if @deadline %>
+    <strong>Assigned to Members:</strong>
+        <% @deadline_members.each_with_index do 
+            |member, index| %>
+              <%= member.name %><% if index != @deadline_members.length-1 %>,
+              <% end %>
         <% end %>
     <% end %>
 </p>

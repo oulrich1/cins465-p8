@@ -96,7 +96,7 @@
           <li><a href="/deadlines">All Deadlines</a></li>
           <li><p class="seperator-tiny"></p></li>
           <% if member_signed_in? %>
-            <li><%=link_to "My Projects", "/members/projects" %></li>
+            <li><%=link_to "My Projects", "/members/#{current_member.id}/projects" %></li>
             <li><%=link_to "My Deadlines", "/members/deadlines" %></li>
             <li><%=link_to "Profile", controller: "members", action: "show", id: current_member.id %></li>
             <li><a href="members/sign_out"></a></li>

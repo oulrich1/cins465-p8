@@ -5,6 +5,8 @@ class Project < ActiveRecord::Base
     has_many :member_project_groupings , :foreign_key => 'p_id'
     has_many :members, :through => :member_project_groupings
 
+    # has_many :deadlines , :foreign_key => 'p_id'
+    # has_many :members, :through => :deadlines
+    
     has_many :deadlines , :foreign_key => 'p_id'
-    has_many :members, :through => :deadlines
 end

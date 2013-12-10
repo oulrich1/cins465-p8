@@ -3,19 +3,33 @@
 <%= simple_form_for(@deadline, method: :post, url: "apply_deadline_to_members") do |f| %>
   <%= f.error_notification %>
 
+     <%  members_to_assign_deadline = 
+      Member.select("*")
+            .where("id not in (select MDG.m_id from member_deadline_groupings as MDG where MDG.d_id = #{@deadline.id})")
+
+     # select * from members where id not in (select MDG.m_id from member_deadline_groupings as MDG where MDG.d_id = 9);
+     # Member.joins("LEFT OUTER JOIN deadlines on deadlines.m_id = members.id").where("deadlines.m_id is null").joins("RIGHT OUTER JOIN member_project_groupings as MPG on MPG.m_id = members.id")
+     %>
+
   <div class="form-inputs">
     <table>
     <thead>
-        <tr bgcolor="#AFAFAF">
-            <th style="text-align:right;">Select</th>
-            <th>Member</th>
-        </tr>
+      
+            <% if members_to_assign_deadline.length != 0 %>
+              <tr bgcolor="#AFAFAF">
+                <th style="text-align:right;">Select</th>
+                <th>Member</th>
+              </tr>
+            <% else %>
+              <div style="width: 62%;">
+                Current Members cannot have a deadline assigned to them under this project.
+                Members haven't been added to this project.
+              </div>
+            <% end %>
+        
     </thead>
     <tbody>
-        <%  Member.joins("LEFT OUTER JOIN deadlines on deadlines.m_id = members.id")
-                  .where("deadlines.m_id is null")
-                  .joins("RIGHT OUTER JOIN member_project_groupings as MPG on MPG.m_id = members.id")
-                  .each do |member| %>
+         <% members_to_assign_deadline.each do |member| %>
             <tr>
                 <td style="text-align:right;">
                     <%= check_box_tag "deadline[#{member.id}]" %> <br />
@@ -28,8 +42,10 @@
   </div>
 
   <div class="form-actions">
-    <%= f.submit "Append Selected Members to Deadline!", class: "button" %>
+    <% if members_to_assign_deadline.length != 0 %>
+      <%= f.submit "Append Selected Members to Deadline!", class: "button" %>
+    <% end %>
   </div>
 
-  <small>soon this will be visualized...</small>
+ 
 <% end %>

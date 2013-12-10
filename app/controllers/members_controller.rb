@@ -35,7 +35,7 @@ class MembersController < ApplicationController
   end
 
   def show_projects
-    
+    @member = Member.find(params[:id])
   end
 
   # GET /members/new

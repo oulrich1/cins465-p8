@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131209044638) do
+ActiveRecord::Schema.define(version: 20131210084220) do
 
   create_table "deadlines", force: true do |t|
     t.integer  "m_id"
@@ -27,6 +27,13 @@ ActiveRecord::Schema.define(version: 20131209044638) do
     t.string   "name"
     t.string   "email"
     t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "member_deadline_groupings", force: true do |t|
+    t.integer  "m_id"
+    t.integer  "d_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
