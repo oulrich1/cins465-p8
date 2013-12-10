@@ -4,11 +4,25 @@ GroupProjectSync::Application.routes.draw do
 
   get "/members/projects", to: "members#show_projects"
 
+  # show my deadlines that belong to me.. 
+  # aka have a m_id equal to current_member.id
+    get "/members/deadlines", to: "members#show_deadlines"
+
   get "/members/:id/my_project_managers", to: "members#show_my_project_managers"
   get "/members/project_managers", to: "members#show_all_project_managers"
 
   devise_for :members, :controllers => {:registrations => "registrations"}
   
+  
+
+  post "/projects/:p_id/deadlines/:d_id/apply_deadline_to_members", to: "deadlines#apply_deadline_to_members"
+  get "/projects/:p_id/deadlines/:id/", to: "deadlines#show"
+  get "/projects/:p_id/deadlines/:d_id/append_member", to: "deadlines#append_member"
+  get "/projects/:id/deadlines/new", to: "deadlines#new"
+
+  # show this deadline that belongs to THAT project
+    get "/projects/:p_id/deadlines/:d_id", to: "deadlines#show"
+
   resources :deadlines
 
   get "/projects/:id/show_members", to: "projects#show_members"

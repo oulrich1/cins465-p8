@@ -1,0 +1,33 @@
+<!-- Add Members to your project -->
+
+<%= simple_form_for(@deadline, method: :post, url: "apply_deadline_to_members") do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <table>
+    <thead>
+        <tr bgcolor="#AFAFAF">
+            <th style="text-align:right;">Select</th>
+            <th>Member</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% Member.joins("LEFT OUTER JOIN deadlines on deadlines.m_id = members.id")
+                  .where("deadlines.m_id is null").each do |member| %>
+            <tr>
+                <td style="text-align:right;">
+                    <%= check_box_tag "deadline[#{member.id}]" %> <br />
+                </td>
+                <td><%= member.name %></td>
+            </tr>
+        <% end %>
+    </tbody>
+    </table>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit "Append Selected Members to Deadline!", class: "button" %>
+  </div>
+
+  <small>soon this will be visualized...</small>
+<% end %>

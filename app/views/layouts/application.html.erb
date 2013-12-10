@@ -41,8 +41,13 @@
                 <li><a href="/deadlines">Deadlines</a></li>
             </ul>
           </li>
-
-          <li class="active"><a href="/members/sign_in">Login</a></li>
+          <% if member_signed_in? %>
+            <li class="active">
+              <%=link_to "Logout", "/members/sign_out", id: current_member.id , method: :delete %>
+            </li>
+          <% else %>
+            <li class="active"><a href="/members/sign_in">Login</a></li>
+          <% end %>
         </ul>
 
         <!-- Left Nav Section -->
@@ -92,6 +97,7 @@
           <li><p class="seperator-tiny"></p></li>
           <% if member_signed_in? %>
             <li><%=link_to "My Projects", "/members/projects" %></li>
+            <li><%=link_to "My Deadlines", "/members/deadlines" %></li>
             <li><%=link_to "Profile", controller: "members", action: "show", id: current_member.id %></li>
             <li><a href="members/sign_out"></a></li>
             <li><%=link_to "Logout", "/members/sign_out", id: current_member.id , method: :delete %></li>

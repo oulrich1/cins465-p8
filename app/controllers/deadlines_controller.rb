@@ -14,12 +14,57 @@ class DeadlinesController < ApplicationController
 
   # GET /deadlines/new
   def new
+    @project  = Project.find(params[:id])
     @deadline = Deadline.new
   end
 
   # GET /deadlines/1/edit
   def edit
   end
+
+  def append_member
+    @project  = Project.find(params[:p_id])
+    @deadline  = Deadline.find(params[:d_id])
+    # now show the list of members
+    # that we can append...
+
+    # redirect_to "append_member.html.erb"
+  end
+
+  def apply_deadline_to_members
+    @project  = Project.find(params[:p_id])
+    @deadline  = Deadline.find(params[:d_id])
+
+    tuple = {   
+                m_id: 0, 
+                p_id: @project.id.to_s, 
+                title: @deadline.title, 
+                description: @deadline.description, 
+                due_date: @deadline.due_date
+            }
+
+    members_to_add = params[:deadline]
+    members_to_add.each do |pair|
+        tuple[:m_id] = pair[0];
+        save_member_project_deadline(tuple)
+    end
+
+    redirect_to @project
+  end
+
+    def save_member_project_deadline(tuple)
+      if Deadline.find_by(tuple)
+        puts("Warning: grouping already exists! " + tuple.to_s)
+      else 
+        grouping = Deadline.new(tuple)
+        if grouping.save
+          puts("Successfully Saved new deadline association: " + grouping.to_s)
+        else
+          puts("Failed to Save new deadline associationw/ m_id: "\
+                    + id.to_s + ", p_id: " + @project.id)
+        end
+      end
+    end
 
   # POST /deadlines
   # POST /deadlines.json
@@ -28,7 +73,7 @@ class DeadlinesController < ApplicationController
 
     respond_to do |format|
       if @deadline.save
-        format.html { redirect_to @deadline, notice: 'Deadline was successfully created.' }
+        format.html { redirect_to "/projects/#{deadline_params['p_id']}", notice: 'Deadline was successfully created.' }
         format.json { render action: 'show', status: :created, location: @deadline }
       else
         format.html { render action: 'new' }
@@ -69,6 +114,6 @@ class DeadlinesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def deadline_params
-      params.require(:deadline).permit(:title, :members_id, :projects_id, :description, :due_date)
+      params.require(:deadline).permit(:title, :m_id, :p_id, :description, :due_date, :members_to_add)
     end
 end

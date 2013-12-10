@@ -83,6 +83,11 @@ class ProjectsController < ApplicationController
     redirect_to @project
   end
 
+  # GET /projects/:id/deadline/new
+  def new_deadline
+    
+  end
+
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
@@ -150,6 +155,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :expected_due_date, :manager_id)
+      params.require(:project).permit(:name, :expected_due_date, :manager_id, :url)
     end
 end

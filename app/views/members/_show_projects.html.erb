@@ -4,6 +4,7 @@
         <th>Member</th>
         <th></th>
         <th></th>
+         <th></th>
     </tr>
 </thead>
 <tbody>
@@ -12,7 +13,8 @@
         .where("member_project_groupings.m_id = #{current_member.id}").each do |project| %>
         <tr>
             <td><%= project.name %></td>
-            <td><%= link_to 'Remove Members', "/projects/#{project.id}/remove_members" %></td>
+            <td><%= link_to 'Show', project %></td>
+            <td><%= link_to 'Edit', edit_project_path(project) %></td>
             <td><%= link_to 'Delete', "/projects/#{project.id}", method: :delete %> </td>
         </tr>
     <% end %>

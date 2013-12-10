@@ -7,6 +7,9 @@ class Member < ActiveRecord::Base
 
     has_many :member_project_groupings, :foreign_key => 'm_id'
     has_many :projects, :through => :member_project_groupings
+
+    has_many :deadlines, :foreign_key => 'm_id'
+    has_many :projects, :through => :deadlines
 end
 
 

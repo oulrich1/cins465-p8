@@ -1,13 +1,27 @@
+
+
 <%= simple_form_for(@deadline) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.input :title %>
+
+    <%= hidden_field_tag "deadline[m_id]", current_member.id %>
+
+    <% if @project %>
+        <%= hidden_field_tag "deadline[p_id]", @project.id %>
+    <% else %>
+        <%= hidden_field_tag "deadline[p_id]", @deadline.p_id %>
+    <% end %>
+
     <%= f.input :description %>
     <%= f.input :due_date %>
+
   </div>
 
   <div class="form-actions">
     <%= f.button :submit, class: "button" %>
   </div>
 <% end %>
+
+

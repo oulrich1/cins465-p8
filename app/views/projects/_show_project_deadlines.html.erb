@@ -1,0 +1,28 @@
+<table>
+<thead>
+    <tr class="tr-head">
+        <th>Assigned Member</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th></th>
+        <th></th>
+    </tr>
+</thead>
+<tbody>
+    <% @project.deadlines.each do |deadline| %>
+        <tr>
+            <td>
+              <%= link_to Member.find(deadline.m_id).name, Member.find(deadline.m_id) %>
+            </td>
+            <td><%= link_to deadline.title, deadline %></td>
+            <td><%= deadline.description %></td>
+            <% if current_member && @project && current_member.id == @project.manager_id %>
+               <td><%= link_to 'Destroy', deadline, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+               <td><%= link_to 'Assign Members', 
+                    "/projects/#{@project.id}/deadlines/#{deadline.id}/append_member"%>
+               </td>
+           <% end %>
+        </tr>
+    <% end %>
+</tbody>
+</table>

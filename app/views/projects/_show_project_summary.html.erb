@@ -19,5 +19,13 @@
             <td style="text-align:right;"><strong>Manager:</strong></td>
             <td><%= Member.find(@project.manager_id).name  %></td>
         </tr>
+
+        <% if defined? @project.url %>
+        <tr>
+            <td style="text-align:right;"><strong>URL:</strong></td>
+            <td><%= link_to "Link to: " + @project.name, @project.url %></td>
+        </tr>
+        <% end %>
+
     </tbody>
 </table>

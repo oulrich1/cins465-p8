@@ -23,11 +23,11 @@
 
     <div class="seperator-small" style="opacity: 0.45;"></div>
     <h2>Deadlines</h2>
-    
+    <%= render "show_project_deadlines" %>
     <div>
 
     <% if current_member && (current_member.id == @project.manager_id || MemberProjectGrouping.find_by({m_id: current_member.id, p_id: @project.id}) ) %>
-        <%= link_to 'New Deadline', new_deadline_path %>
+        <%= link_to 'New Deadline', "/projects/#{@project.id}"+new_deadline_path %>
     <% end %>
     </div>
     <br>

@@ -3,13 +3,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Members:</strong>
-  <%= @deadline.members %>
-</p>
-
-<p>
-  <strong>Projects:</strong>
-  <%= @deadline.projects %>
+    <% if @deadline.members %>
+    <strong>Members:</strong>
+        <% @deadline.members.each do |member| %>
+            <%= member.name %>
+        <% end %>
+    <% end %>
 </p>
 
 <p>

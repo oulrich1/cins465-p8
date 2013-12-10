@@ -19,7 +19,8 @@
     <% @deadlines.each do |deadline| %>
       <tr>
         <td><%= deadline.m_id %></td>
-        <td><%= deadline.p_id %></td>
+        <td><%= link_to  Project.find(deadline.p_id).name, 
+                Project.find(deadline.p_id) %></td>
         <td><%= deadline.description %></td>
         <td><%= deadline.due_date %></td>
         <td><%= link_to 'Show', deadline %></td>
@@ -32,7 +33,8 @@
 
 <br>
 
-<%= link_to 'New Deadline', new_deadline_path %>
-
+<% if current_member && @project && current_member.id == @project.manager_id %>
+  <%= link_to 'New Deadline', new_deadline_path %>
+<% end %>
 
 </div>
