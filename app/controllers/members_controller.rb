@@ -30,6 +30,10 @@ class MembersController < ApplicationController
       .where("members.id is not NULL");
   end
   
+  def show_deadlines
+    @deadlines = Deadline.select("*").where("deadlines.m_id = #{current_member.id}")
+  end
+
   def show_projects
     
   end

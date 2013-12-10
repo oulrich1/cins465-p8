@@ -51,7 +51,7 @@ table{
 
 
 .content-row{
-    min-height: 200px;
+    min-height: 230px;
     max-width: 65.5em;
 }
 
@@ -68,7 +68,7 @@ table{
 }
 
 .seperator-tiny{
-    width: 42%; 
+    width: 72%; 
     min-width: 50px;
     max-width: 200px;
     height: 5px; 

@@ -1,9 +1,21 @@
 <div class="large-9 push-3 columns">
 
-<h1> Add Members to your Deadline Requirement! </h1>
+<h1 class="subheader"><small> Add Members to your Deadline Requirement! </small></h1>
 
-<h4> <small>Project Name:</small> <%= @project.name %></h4>
-<h4> <small>Deadline Title:</small> <%= @deadline.title %></h4>
+    <table style="margin-left: 20px;">
+    <tbody>
+        <tr>
+            <th style="text-align:right;"><small>Project Name:</small></th>
+            <th><h4>  <%= @project.name %></h4></th>
+        </tr>
+        <tr>
+            <th style="text-align:right;"><small>Deadline Title:</small></th>
+            <th><h5>  <%= @deadline.title %></h5></th>
+        </tr>
+    </tbody>
+    </table>
+
+
 <div class="seperator-medium spm-light"></div>
 
     <%= render 'append_members_form' %>
@@ -12,7 +24,7 @@
 
 <div>
     <%= link_to 'Show', @project %> |
-    <%= link_to 'Back', projects_path %>
+    <%= link_to 'Back', @project %>
 </div>
 
 </div>

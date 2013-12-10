@@ -13,12 +13,12 @@ GroupProjectSync::Application.routes.draw do
 
   devise_for :members, :controllers => {:registrations => "registrations"}
   
-  
 
+  get "/projects/:id/deadlines/new", to: "deadlines#new"
   post "/projects/:p_id/deadlines/:d_id/apply_deadline_to_members", to: "deadlines#apply_deadline_to_members"
   get "/projects/:p_id/deadlines/:id/", to: "deadlines#show"
   get "/projects/:p_id/deadlines/:d_id/append_member", to: "deadlines#append_member"
-  get "/projects/:id/deadlines/new", to: "deadlines#new"
+ 
 
   # show this deadline that belongs to THAT project
     get "/projects/:p_id/deadlines/:d_id", to: "deadlines#show"

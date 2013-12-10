@@ -18,7 +18,7 @@
   <tbody>
     <% @deadlines.each do |deadline| %>
       <tr>
-        <td><%= deadline.m_id %></td>
+        <td><%= link_to Member.find(deadline.m_id).name, Member.find(deadline.m_id) %></td>
         <td><%= link_to  Project.find(deadline.p_id).name, 
                 Project.find(deadline.p_id) %></td>
         <td><%= deadline.description %></td>

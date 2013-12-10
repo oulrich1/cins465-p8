@@ -16,6 +16,7 @@ class DeadlinesController < ApplicationController
   def new
     @project  = Project.find(params[:id])
     @deadline = Deadline.new
+    puts "------------------------------"
   end
 
   # GET /deadlines/1/edit
@@ -109,7 +110,9 @@ class DeadlinesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_deadline
+      puts "------------------------------"
       @deadline = Deadline.find(params[:id])
+
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

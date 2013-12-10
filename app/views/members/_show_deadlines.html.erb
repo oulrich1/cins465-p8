@@ -1,0 +1,24 @@
+<table>
+<thead>
+    <tr class="tr-head">
+        <th>Title</th>
+        <th>Description</th>
+        <% if @deadlines.length != 0 %>
+            <th></th>
+            <th></th>
+            <th></th>
+        <% end %>
+    </tr>
+</thead>
+<tbody>
+    <% @deadlines.each do |deadline| %>
+        <tr>
+            <td><%= deadline.title %></td>
+            <td><%= deadline.description %></td>
+            <td><%= link_to 'Show', deadline %></td>
+            <td><%= link_to 'Edit', edit_deadline_path(deadline) %></td>
+            <td><%= link_to 'Delete', "/deadlines/#{deadline.id}", method: :delete %> </td>
+        </tr>
+    <% end %>
+</tbody>
+</table>
