@@ -5,6 +5,7 @@ class AddDeviseToMembers < ActiveRecord::Migration
       # t.integer :id
       t.string :name,               :null => false, :default => ""
       t.string :type,               :null => false, :default => ""
+      t.string :is_project_manager, :null => false, :default => ""
       t.string :email,              :null => false, :default => ""
       t.string :encrypted_password, :null => false, :default => ""
 

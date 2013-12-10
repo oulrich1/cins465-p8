@@ -102,8 +102,8 @@
             <li><a href="members/sign_out"></a></li>
             <li><%=link_to "Logout", "/members/sign_out", id: current_member.id , method: :delete %></li>
           <% else %>
-            <li><a href="members/sign_in">Login</a></li>
-            <li><a href="members/sign_up">Register</a></li>
+            <li><a href="/members/sign_in">Login</a></li>
+            <li><a href="/members/sign_up">Register</a></li>
           <% end %>
         </ul>
         
