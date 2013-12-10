@@ -6,7 +6,7 @@ GroupProjectSync::Application.routes.draw do
 
   # show my deadlines that belong to me.. 
   # aka have a m_id equal to current_member.id
-    get "/members/deadlines", to: "members#show_deadlines"
+  get "/members/deadlines", to: "members#show_deadlines"
 
   get "/members/:id/my_project_managers", to: "members#show_my_project_managers"
   get "/members/project_managers", to: "members#show_all_project_managers"

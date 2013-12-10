@@ -31,7 +31,8 @@ class MembersController < ApplicationController
   end
   
   def show_deadlines
-    @deadlines = Deadline.select("*").where("deadlines.m_id = #{current_member.id}")
+    @deadlines = Deadline.select("*")
+      .where("id in (select d_id from member_deadline_groupings as MDG where MDG.m_id = #{current_member.id})")
   end
 
   def show_projects
