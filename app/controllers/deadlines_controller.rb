@@ -11,7 +11,7 @@ class DeadlinesController < ApplicationController
   # GET /deadlines/1.json
   def show
     @deadline = Deadline.find(params[:id])
-    @deadline_members = Member.where("id in(select m_id from member_deadline_groupings)")
+    @deadline_members = Member.where("id in(select m_id from member_deadline_groupings as MPG where MPG.d_id = #{@deadline.id})")
   end
 
   # GET /deadlines/new
