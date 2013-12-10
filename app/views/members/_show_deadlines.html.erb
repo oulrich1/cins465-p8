@@ -1,6 +1,7 @@
 <table>
 <thead>
     <tr class="tr-head">
+        <th>Author</th>
         <th>Title</th>
         <th>Description</th>
         <% if @deadlines.length != 0 %>
@@ -13,6 +14,7 @@
 <tbody>
     <% @deadlines.each do |deadline| %>
         <tr>
+            <td><%= link_to Member.find(deadline.m_id).name, Member.find(deadline.m_id) %></td>
             <td><%= deadline.title %></td>
             <td><%= deadline.description %></td>
             <td><%= link_to 'Show', deadline %></td>
