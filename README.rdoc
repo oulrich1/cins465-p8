@@ -1,28 +1,17 @@
-== README
+== Project Sync Tool
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+-> Provides an interface for managers to create projects and manage deadlines on those projects
 
-Things you may want to cover:
+-> Managers can assign deadlines to members, and assign members to projects
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+-> Members and Managers can view:
+=>  their own deadlines, other user's deadlines, all deadlines
+=>  their own projects, other user's projects, all projects
+=>  members that are working on their project.
+=>  their managers..
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+It would be nice to have a visualization for the deadlines...
+
+Maybe a Gantt chart sort of display but less complicated..
+more like google calander..
