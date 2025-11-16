@@ -1,0 +1,48 @@
+version: '3.8'
+
+# Production docker-compose configuration with MySQL
+# Usage: docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DATABASE_PASSWORD:-changeme}
+      - MYSQL_DATABASE=${DATABASE_NAME:-group_project_sync_production}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  web:
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - RAILS_ENV=production
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
+      - DATABASE_NAME=${DATABASE_NAME:-group_project_sync_production}
+      - DATABASE_USERNAME=${DATABASE_USERNAME:-root}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD:-changeme}
+      - DATABASE_HOST=db
+      - RAILS_SERVE_STATIC_FILES=true
+      - RAILS_LOG_TO_STDOUT=true
+    command: >
+      sh -c "
+        bundle exec rake db:create db:migrate &&
+        bundle exec puma -C config/puma.rb
+      "
+    volumes:
+      # Don't mount db directory in production with MySQL
+      - ./log:/app/log
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+    driver: local
