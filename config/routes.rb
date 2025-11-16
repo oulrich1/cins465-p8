@@ -1,27 +1,24 @@
-GroupProjectSync::Application.routes.draw do
-
+Rails.application.routes.draw do
   resources :member_project_groupings
 
   get "/members/:id/projects", to: "members#show_projects"
 
-  # show my deadlines that belong to me.. 
+  # show my deadlines that belong to me..
   # aka have a m_id equal to current_member.id
   get "/members/deadlines", to: "members#show_deadlines"
 
   get "/members/:id/my_project_managers", to: "members#show_my_project_managers"
   get "/members/project_managers", to: "members#show_all_project_managers"
 
-  devise_for :members, :controllers => {:registrations => "registrations"}
-  
+  devise_for :members, controllers: { registrations: "registrations" }
 
   get "/projects/:id/deadlines/new", to: "deadlines#new"
   post "/projects/:p_id/deadlines/:d_id/apply_deadline_to_members", to: "deadlines#apply_deadline_to_members"
   get "/projects/:p_id/deadlines/:id/", to: "deadlines#show"
   get "/projects/:p_id/deadlines/:d_id/append_member", to: "deadlines#append_member"
- 
 
   # show this deadline that belongs to THAT project
-    get "/projects/:p_id/deadlines/:d_id", to: "deadlines#show"
+  get "/projects/:p_id/deadlines/:d_id", to: "deadlines#show"
 
   resources :deadlines
 
@@ -35,20 +32,19 @@ GroupProjectSync::Application.routes.draw do
 
   resources :projects
 
-
-  resources :members do 
+  resources :members do
     resources :projects
-  end 
+  end
 
+  get "about", to: "about#index"
 
-  get "about" , to: "about#index"
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
- 
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
+  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  get "up" => "rails/health#show", as: :rails_health_check
 
-  # You can have the root of your site routed with "root"
-
+  # Defines the root path route ("/")
   root 'projects#index'
 
   # Example of regular route:
