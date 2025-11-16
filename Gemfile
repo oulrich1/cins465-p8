@@ -1,50 +1,52 @@
 source 'https://rubygems.org'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.2'
+ruby '3.3.6'
 
-# Use mysql as the database for Active Record
-gem 'mysql2'
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '~> 7.1.0'
+
+# Use sqlite3 as the database for development/test, mysql for production
+gem 'sqlite3', '~> 2.0', group: [:development, :test]
+gem 'mysql2', '~> 0.5', group: :production
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 6.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
-# Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
-
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
-
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+# Turbolinks makes following links in your web application faster.
+gem 'turbolinks', '~> 5'
 
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
+# Build JSON APIs with ease.
+gem 'jbuilder', '~> 2.11'
 
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
+# Reduces boot times through caching; required in config/boot.rb
+gem 'bootsnap', require: false
+
+# Use Puma as the app server
+gem 'puma', '~> 6.0'
+
+# Sprockets for asset pipeline (keeping for compatibility)
+gem 'sprockets-rails'
+
+group :development, :test do
+  # Debugging
+  gem 'debug', platforms: %i[mri mingw x64_mingw]
 end
 
-gem 'better_errors'
-gem 'devise'
-gem 'zurb-foundation', '~> 4.2.2'
-gem 'simple_form', '~> 3.0.0.rc'
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'web-console'
+end
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
+gem 'devise', '~> 4.9'
+gem 'foundation-rails', '~> 6.7'
+gem 'simple_form', '~> 5.3'
 
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
+# Timezone data for Windows
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
