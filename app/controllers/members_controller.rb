@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  before_filter :authenticate_member! # current_member
+  before_action :authenticate_member! # current_member
   before_action :set_member, only: [:show, :edit, :update, :destroy]
 
 # in the forms we need this association??
@@ -25,14 +25,14 @@ class MembersController < ApplicationController
   def show_my_project_managers
     @managers = Member
       .select("members.*")
-      .joins("right outer join member_project_groupings as MPG on MPG.m_id = #{current_member.id}")
-      .joins("right outer join projects on projects.id = MPG.p_id")
-      .where("members.id is not NULL");
+      .joins("RIGHT OUTER JOIN member_project_groupings AS MPG ON MPG.m_id = ?", current_member.id)
+      .joins("RIGHT OUTER JOIN projects ON projects.id = MPG.p_id")
+      .where("members.id IS NOT NULL")
   end
-  
+
   def show_deadlines
-    @deadlines = Deadline.select("*")
-      .where("id in (select d_id from member_deadline_groupings as MDG where MDG.m_id = #{current_member.id})")
+    @deadlines = Deadline
+      .where("id IN (SELECT d_id FROM member_deadline_groupings WHERE m_id = ?)", current_member.id)
   end
 
   def show_projects

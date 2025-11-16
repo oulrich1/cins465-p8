@@ -63,17 +63,17 @@ A Rails-based project management application for tracking projects, deadlines, a
 
 3. **Setup database**
    ```bash
-   rake db:create db:migrate
+   bundle exec rake db:create db:migrate
    ```
 
 4. **Seed database (optional)**
    ```bash
-   rake db:seed
+   bundle exec rake db:seed
    ```
 
 5. **Start the server**
    ```bash
-   rails server
+   bundle exec rails server
    ```
 
 6. **Visit the application**
@@ -110,7 +110,7 @@ DATABASE_SOCKET=/var/run/mysqld/mysqld.sock
 Run the test suite:
 
 ```bash
-rake test
+bundle exec rake test
 ```
 
 ## Deployment
@@ -119,9 +119,9 @@ rake test
 
 1. Set all required environment variables
 2. Install production dependencies: `bundle install`
-3. Setup database: `RAILS_ENV=production rake db:create db:migrate`
-4. Precompile assets: `RAILS_ENV=production rake assets:precompile`
-5. Start server: `RAILS_ENV=production rails server`
+3. Setup database: `RAILS_ENV=production bundle exec rake db:create db:migrate`
+4. Precompile assets: `RAILS_ENV=production bundle exec rake assets:precompile`
+5. Start server: `RAILS_ENV=production bundle exec rails server`
 
 ### Docker Deployment
 

@@ -9,8 +9,8 @@ gem 'rails', '~> 7.1.0'
 gem 'sqlite3', '~> 2.0', group: [:development, :test]
 gem 'mysql2', '~> 0.5', group: :production
 
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 6.0'
+# Use Dart Sass for stylesheets (Rails 7 recommended)
+gem 'dartsass-rails', '~> 0.5.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
