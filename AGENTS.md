@@ -23,10 +23,10 @@ This guide provides concise, accurate instructions for deploying and running the
 bundle install --without production
 
 # Setup database
-rake db:create db:migrate
+bundle exec rake db:create db:migrate
 
 # Start server
-rails server
+bundle exec rails server
 
 # Visit http://localhost:3000
 ```
@@ -106,7 +106,7 @@ docker run -p 3000:3000 \
 
 | Variable | Description | Example |
 |----------|-------------|---------|
-| `SECRET_KEY_BASE` | Rails secret key | Generate with `rails secret` |
+| `SECRET_KEY_BASE` | Rails secret key | Generate with `bundle exec rails secret` |
 | `RAILS_ENV` | Environment | `production` |
 
 ### Required for Production with MySQL
@@ -134,7 +134,7 @@ docker run -p 3000:3000 \
 Automatic - no configuration needed.
 
 ```bash
-rake db:create db:migrate
+bundle exec rake db:create db:migrate
 ```
 
 ### Production (MySQL)
@@ -167,13 +167,13 @@ rake db:create db:migrate
 
 ```bash
 # All tests
-rake test
+bundle exec rake test
 
 # Specific test file
-rake test test/models/member_test.rb
+bundle exec rake test test/models/member_test.rb
 
 # With coverage (if configured)
-COVERAGE=true rake test
+COVERAGE=true bundle exec rake test
 ```
 
 ### Run Tests in Docker
@@ -188,7 +188,7 @@ docker-compose run --rm web rake test
 
 ```bash
 # Local
-rails console
+bundle exec rails console
 
 # Docker
 docker-compose run --rm web rails console
@@ -217,7 +217,7 @@ docker-compose logs -f web
 
 ```bash
 # Local
-rails dbconsole
+bundle exec rails dbconsole
 
 # Docker
 docker-compose run --rm web rails dbconsole
@@ -227,7 +227,7 @@ docker-compose run --rm web rails dbconsole
 
 ```bash
 # Local
-rake db:drop db:create db:migrate db:seed
+bundle exec rake db:drop db:create db:migrate db:seed
 
 # Docker
 docker-compose run --rm web rake db:reset
@@ -242,7 +242,7 @@ docker-compose run --rm web rake db:reset
 lsof -ti:3000 | xargs kill -9
 
 # Or use different port
-rails server -p 3001
+bundle exec rails server -p 3001
 ```
 
 ### Database Connection Issues
@@ -250,7 +250,7 @@ rails server -p 3001
 **SQLite3 locked:**
 ```bash
 rm -f db/*.sqlite3
-rake db:create db:migrate
+bundle exec rake db:create db:migrate
 ```
 
 **MySQL connection refused:**
@@ -271,10 +271,10 @@ bundle install
 
 ```bash
 # Clear precompiled assets
-rake assets:clobber
+bundle exec rake assets:clobber
 
 # Recompile
-rake assets:precompile
+bundle exec rake assets:precompile
 ```
 
 ## Security Notes
@@ -301,7 +301,7 @@ rake assets:precompile
 
 Enable caching in development:
 ```bash
-rake dev:cache
+bundle exec rake dev:cache
 ```
 
 ### Database Pooling
@@ -408,8 +408,8 @@ Not currently configured. To add:
 ```bash
 # Development
 bundle install --without production
-rake db:create db:migrate
-rails server
+bundle exec rake db:create db:migrate
+bundle exec rails server
 
 # Docker
 docker-compose up -d
@@ -422,10 +422,10 @@ RAILS_ENV=production rake assets:precompile
 RAILS_ENV=production rails server
 
 # Testing
-rake test
+bundle exec rake test
 docker-compose run --rm web rake test
 
 # Console
-rails console
+bundle exec rails console
 docker-compose run --rm web rails console
 ```

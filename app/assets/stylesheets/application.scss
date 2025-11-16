@@ -1,0 +1,117 @@
+// Application styles - compiled by Dart Sass
+@use "sass:math";
+
+// Import Foundation
+@import "foundation_and_overrides";
+
+// Import other stylesheets
+@import "about";
+@import "deadlines";
+@import "home";
+@import "member_project_groupings";
+@import "members";
+@import "projects";
+@import "registrations";
+@import "scaffolds";
+
+// Custom application styles (from old application.css)
+@media (max-width: 530px), (max-height: 200px) {
+  body, body p {
+    font-size: 0.6em !important;
+  }
+}
+
+@media (max-width: 230px) {
+  body, body p, li {
+    font-size: 0.4em !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .fixt {
+    position: relative !important;
+    margin-left: 0px !important;
+  }
+  .content-row {
+    height: 300px;
+    min-height: 500px;
+  }
+}
+
+form select.datetime {
+  width: inherit !important;
+}
+
+table {
+  background-color: #F5F5F5 !important;
+}
+
+.tr-head {
+  background-color: #AFAFAF;
+}
+
+.content-row {
+  min-height: 230px;
+  max-width: 65.5em;
+}
+
+.large-9 {
+  width: 80%;
+}
+
+.large-3 {
+  width: 19%;
+}
+
+.fixt {
+  position: fixed;
+  margin-left: 50px !important;
+}
+
+.seperator-tiny {
+  width: 72%;
+  min-width: 50px;
+  max-width: 200px;
+  height: 5px;
+  background-color: black;
+  border-radius: 3px;
+  opacity: 0.65;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.seperator-small {
+  width: 72%;
+  min-width: 250px;
+  max-width: 500px;
+  height: 7px;
+  background-color: black;
+  opacity: 0.7;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.seperator-medium {
+  width: 72%;
+  min-width: 250px;
+  max-width: 500px;
+  height: 7px;
+  background-color: black;
+  opacity: 0.7;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  width: 90%;
+  max-width: 800px;
+}
+
+.spm-dark {
+  opacity: 0.75;
+}
+
+.spm-medium {
+  opacity: 0.45;
+}
+
+.spm-light {
+  opacity: 0.25;
+}
